@@ -7,9 +7,9 @@ var MQTT_TOPIC = "topic";
 
 (function() {
   var params = new URLSearchParams(window.location.search);
-  var mqttServerAddress = params.get("mqttServerAddress") || MQTT_SERVER_ADDRESS;
-  var mqttServerPort = Number(params.get("mqttServerPort")) || MQTT_SERVER_PORT;
-  var mqttTopic = params.get("mqttTopic") || MQTT_TOPIC;
+  var mqttServerAddress = params.get("server") || MQTT_SERVER_ADDRESS;
+  var mqttServerPort = Number(params.get("port")) || MQTT_SERVER_PORT;
+  var mqttTopic = params.get("topic") || MQTT_TOPIC;
 
   var config = liquidFillGaugeDefaultSettings();
   config.displayPercent = false;
