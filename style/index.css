@@ -1,3 +1,8 @@
 #air-quality-widget {
-  width: 100%;
+  width: 50vw;
+  height: 50vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
