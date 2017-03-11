@@ -16,14 +16,24 @@ var MQTT_TOPIC = "topic";
   var airQualityGauge = loadLiquidFillGauge("air-quality-widget", 0, config);
   var client = new Paho.MQTT.Client(mqttServerAddress, mqttServerPort, mqttClientId);
 
-  client.connect({ onSuccess: function() {
-    console.log("Connected with the MQTT server.");
-    client.subscribe(mqttTopic);
-  }});
-
   client.onMessageArrived = function onMessageArrived(message) {
     console.log("data: " + message.payloadString);
     var data = JSON.parse(message.payloadString);
     airQualityGauge.update(data.pm2_5);
+  };
+  client.onConnectionLost = function(response) {
+    if (response.errorCode) {
+      connectMqttServer();
+    }
+  };
+
+  connectMqttServer();
+
+  function connectMqttServer() {
+    console.log("Connecting the MQTT server...");
+    client.connect({ onSuccess: function() {
+      console.log("Connected with the MQTT server.");
+      client.subscribe(mqttTopic);
+    }});
   }
 }());
