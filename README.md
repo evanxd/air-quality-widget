@@ -23,9 +23,11 @@ The air quality data format/example on the MQTT broker topic is
 ```json
 { "pm1_0": 26, "pm2_5": 36, "pm10_0": 38 }
 ```
+Please make sure you have same format data to use the widget, or just flash the [mqtt-air-quality-monitoring-station][firmware] firmware into your device to do so.
 
 [d3-js]: https://d3js.org/
 [liquid-fill-gauge]: http://bl.ocks.org/brattonc/5e5ce9beee483220e2f6
 [paho]: http://www.eclipse.org/paho
 [demo]: http://evanxd.io/air-quality-widget
 [example]: https://github.com/evanxd/air-quality-widget/blob/master/index.html#L39
+[firmware]: https://github.com/evanxd/mqtt-air-quality-monitoring-station
