@@ -15,6 +15,7 @@ var WIDGET_MODE = "average"; // Currently, it supports average and real-time mod
 
   var config = liquidFillGaugeDefaultSettings();
   config.displayPercent = false;
+  config.waveHeight = 0;
   var airQualityGauge = loadLiquidFillGauge("air-quality-widget", 0, config);
 
   // Show the real-time one-minute average data on the widget.
