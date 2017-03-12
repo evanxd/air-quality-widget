@@ -20,6 +20,10 @@ This is its URL search parameters to receive the real-time air quality data from
   - A MQTT server port, like `8000` in our [example][example].
 - `topic`
   - A MQTT topic you receive the data from, like `topic` in our [example][example].
+- `mode`
+  - The widget mode you want to use, like
+    - `average` means show the one-minute average data, which is the default value.
+    - `real-time` means show the real-time data at a moment.
 
 The air quality data format/example on the MQTT broker topic is
 ```json

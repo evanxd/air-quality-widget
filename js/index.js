@@ -3,6 +3,7 @@
 var MQTT_SERVER_ADDRESS = "broker.mqtt-dashboard.com";
 var MQTT_SERVER_PORT = 8000;
 var MQTT_TOPIC = "topic";
+var WIDGET_MODE = "average"; // Currently, it supports average and real-time modes.
 
 (function() {
   var params = new URLSearchParams(window.location.search);
@@ -10,6 +11,7 @@ var MQTT_TOPIC = "topic";
   var mqttServerPort = Number(params.get("port")) || MQTT_SERVER_PORT;
   var mqttTopic = params.get("topic") || MQTT_TOPIC;
   var mqttClientId = uuid.v4();
+  var widgetMode = params.get("mode") || WIDGET_MODE;
 
   var config = liquidFillGaugeDefaultSettings();
   config.displayPercent = false;
@@ -26,9 +28,11 @@ var MQTT_TOPIC = "topic";
     if (dataAmount < 30) {
       dataAmount++;
     }
+
     var data = JSON.parse(message.payloadString);
     averageData = (averageData * (dataAmount - 1) + data.pm2_5) / dataAmount;
-    airQualityGauge.update(averageData);
+
+    airQualityGauge.update(widgetMode === "average" ? averageData : data.pm2_5);
   };
   client.onConnectionLost = function(response) {
     response.errorCode && connectServer();
