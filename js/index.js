@@ -14,9 +14,13 @@ var WIDGET_MODE = "average"; // Currently, it supports average and real-time mod
   var widgetMode = params.get("mode") || WIDGET_MODE;
 
   var config = liquidFillGaugeDefaultSettings();
+  var colors = getDaqiColors(0);
   config.displayPercent = false;
   config.waveHeight = 0;
-  setDaqiColor(0);
+  config.circleColor = colors.circleColor;
+  config.waveColor = colors.waveColor;
+  config.textColor = colors.textColor;
+  config.waveTextColor = colors.waveTextColor;
   var airQualityGauge = loadLiquidFillGauge("air-quality-widget", 0, config);
 
   // Show the real-time one-minute average data on the widget.
@@ -35,7 +39,11 @@ var WIDGET_MODE = "average"; // Currently, it supports average and real-time mod
     averageData = (averageData * (dataAmount - 1) + data.pm2_5) / dataAmount;
 
     var pm2_5 = widgetMode === "average" ? averageData : data.pm2_5;
-    setDaqiColor(pm2_5);
+    colors = getDaqiColors(pm2_5);
+    config.circleColor = colors.circleColor;
+    config.waveColor = colors.waveColor;
+    config.textColor = colors.textColor;
+    config.waveTextColor = colors.waveTextColor;
     airQualityGauge.update(pm2_5);
   };
   client.onConnectionLost = function(response) {
@@ -52,32 +60,24 @@ var WIDGET_MODE = "average"; // Currently, it supports average and real-time mod
     }});
   }
 
-  function setDaqiColor(pm2_5) {
-    if (pm2_5 >= 0 && pm2_5 <= 35) {
-      config.circleColor = "#2D882D";
-      config.waveColor = "#2D882D";
-      config.textColor = "#106410";
-      config.waveTextColor = "#85CA85";
-    } else if (pm2_5 >= 36 && pm2_5 <= 53) {
-      config.circleColor = "#F8F83F";
-      config.waveColor = "#F8F83F";
-      config.textColor = "#B9B903";
-      config.waveTextColor = "#FFFF69";
-    } else if (pm2_5 >= 54 && pm2_5 <= 70) {
-      config.circleColor = "#F84C3F";
-      config.waveColor = "#F84C3F";
-      config.textColor = "#B91003";
-      config.waveTextColor = "#FF7469";
+  function getDaqiColors(pm2_5) {
+    var colors;
+    if (pm2_5 >= 0 && pm2_5 < 36) {
+      colors = ["#2D882D", "#2D882D", "#2D882D", "#106410"];
+    } else if (pm2_5 >= 36 && pm2_5 < 54) {
+      colors = ["#F8F83F", "#F8F83F", "#B9B903", "#FFFF69"];
+    } else if (pm2_5 >= 54 && pm2_5 < 71) {
+      colors = ["#F84C3F", "#F84C3F", "#B91003", "#FF7469"];
     } else if (pm2_5 >= 71) {
-      config.circleColor = "#4B2D74";
-      config.waveColor = "#4B2D74";
-      config.textColor = "#2F1355";
-      config.waveTextColor = "#8D75AB";
+      colors = ["#4B2D74", "#4B2D74", "#2F1355", "#8D75AB"];
     } else {
-      config.circleColor = "#8E8E9B";
-      config.waveColor = "#8E8E9B";
-      config.textColor = "#535369";
-      config.waveTextColor = "#B8B8BF";
+      colors = ["#8E8E9B", "#8E8E9B", "#535369", "#B8B8BF"];
+    }
+    return {
+      circleColor: colors[0],
+      waveColor: colors[1],
+      textColor: colors[2],
+      waveTextColor: colors[3],
     }
   }
 }());
