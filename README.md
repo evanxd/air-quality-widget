@@ -21,7 +21,7 @@ This is its URL search parameters to receive the real-time air quality data from
 - `topic`
   - A MQTT topic you receive the data from, like `topic` in our [example][example].
 - `mode`
-  - The widget mode you want to use, like
+  - The widget mode you want to use, like `average` in our [example][example].
     - `average` means show the one-minute average data, which is the default value.
     - `real-time` means show the real-time data at a moment.
 
