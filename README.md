@@ -13,7 +13,7 @@ This is a iframe-based widget. You can simply embed it into your web page with t
 <iframe src="http://evanxd.io/air-quality-widget/widget.html?mqtt=broker.mqtt-dashboard.com&port=8000&topic=topic" frameborder="0" scrolling="no"></iframe>
 ```
 
-This is its URL search parameters to receive the real-time air quality data from a specific MQTT server or topic.
+This is its URL search parameters to receive air quality data from a specific MQTT server or topic.
 - `mqtt`
   - A MQTT server address, like `broker.mqtt-dashboard.com` in our [example][example].
 - `port`
