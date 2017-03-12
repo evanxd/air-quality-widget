@@ -21,11 +21,7 @@ This is its URL search parameters to receive the real-time air quality data from
 
 The air quality data format/example on the MQTT broker topic is
 ```json
-{
-  "pm1_0": 26,
-  "pm2_5": 36,
-  "pm10_0": 38
-}
+{ "pm1_0": 26, "pm2_5": 36, "pm10_0": 38 }
 ```
 
 [d3-js]: https://d3js.org/
