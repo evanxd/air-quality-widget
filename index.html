@@ -6,11 +6,24 @@
   <title>Air Quality Widget Demo Page</title>
   <style type="text/css">
     .responsive-container {
-      position: relative;
-      width: 100%;
+      position: absolute;
       height: 0;
-      padding-bottom: 100%;
       overflow: hidden;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    @media (orientation: landscape) {
+      .responsive-container {
+        width: 50%; 
+        padding-bottom: 50%;
+      }
+    }
+    @media (orientation: portrait) {
+      .responsive-container {
+        width: 90%;
+        padding-bottom: 90%;
+      }
     }
     iframe {
       position: absolute;
