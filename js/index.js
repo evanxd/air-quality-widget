@@ -16,6 +16,7 @@ var WIDGET_MODE = "average"; // Currently, it supports average and real-time mod
   var config = liquidFillGaugeDefaultSettings();
   config.displayPercent = false;
   config.waveHeight = 0;
+  setDaqiColor(0);
   var airQualityGauge = loadLiquidFillGauge("air-quality-widget", 0, config);
 
   // Show the real-time one-minute average data on the widget.
@@ -33,7 +34,9 @@ var WIDGET_MODE = "average"; // Currently, it supports average and real-time mod
     var data = JSON.parse(message.payloadString);
     averageData = (averageData * (dataAmount - 1) + data.pm2_5) / dataAmount;
 
-    airQualityGauge.update(widgetMode === "average" ? averageData : data.pm2_5);
+    var pm2_5 = widgetMode === "average" ? averageData : data.pm2_5;
+    setDaqiColor(pm2_5);
+    airQualityGauge.update(pm2_5);
   };
   client.onConnectionLost = function(response) {
     response.errorCode && connectServer();
@@ -47,5 +50,34 @@ var WIDGET_MODE = "average"; // Currently, it supports average and real-time mod
       console.log("Connected with the MQTT server.");
       client.subscribe(mqttTopic);
     }});
+  }
+
+  function setDaqiColor(pm2_5) {
+    if (pm2_5 >= 0 && pm2_5 <= 35) {
+      config.circleColor = "#2D882D";
+      config.waveColor = "#2D882D";
+      config.textColor = "#106410";
+      config.waveTextColor = "#85CA85";
+    } else if (pm2_5 >= 36 && pm2_5 <= 53) {
+      config.circleColor = "#F8F83F";
+      config.waveColor = "#F8F83F";
+      config.textColor = "#B9B903";
+      config.waveTextColor = "#FFFF69";
+    } else if (pm2_5 >= 54 && pm2_5 <= 70) {
+      config.circleColor = "#F84C3F";
+      config.waveColor = "#F84C3F";
+      config.textColor = "#B91003";
+      config.waveTextColor = "#FF7469";
+    } else if (pm2_5 >= 71) {
+      config.circleColor = "#4B2D74";
+      config.waveColor = "#4B2D74";
+      config.textColor = "#2F1355";
+      config.waveTextColor = "#8D75AB";
+    } else {
+      config.circleColor = "#8E8E9B";
+      config.waveColor = "#8E8E9B";
+      config.textColor = "#535369";
+      config.waveTextColor = "#B8B8BF";
+    }
   }
 }());

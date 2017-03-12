@@ -217,10 +217,15 @@ function loadLiquidFillGauge(elementId, value, config) {
 
             text1.transition()
                 .duration(config.waveRiseTime)
-                .tween("text", textTween);
+                .tween("text", textTween)
+                .style("fill", config.textColor);
             text2.transition()
                 .duration(config.waveRiseTime)
-                .tween("text", textTween);
+                .tween("text", textTween)
+                .style("fill", config.waveTextColor);
+
+            gaugeGroup.select("path").style("fill", config.circleColor);
+            fillCircleGroup.select("circle").style("fill", config.waveColor);
 
             var fillPercent = Math.max(config.minValue, Math.min(config.maxValue, value))/config.maxValue;
             var waveHeight = fillCircleRadius*waveHeightScale(fillPercent*100);
