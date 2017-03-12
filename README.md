@@ -1,7 +1,7 @@
 # Air Quality Widget
 A Web widget to visually show real-time air quality data. It depends on two libraries, [D3.js][d3-js] ([Liquid Fill Gauge][liquid-fill-gauge]) to show data visually and [Paho][paho] to get data from a MQTT server.
 
-Check the [demo widget][demo] to see a real-world air quality data. If the value in the widget always keeps zero, it means no one upload air quality data to the MQTT broker/topic. And you can follow the [instruction][mqtt-air-quality-monitoring-station] to setup one and show the data visually with the widget.
+Go to the [demo widget page][demo] to see a real-world air quality data. If the value in the widget always keeps zero, it means no one upload air quality data to the MQTT broker/topic. And you can follow the [instruction][mqtt-air-quality-monitoring-station] to setup one and show the data visually with the widget.
 
 <p align="center">
   <a href="http://evanxd.io/air-quality-widget/"><img src="./images/demo.gif" /></a>
@@ -37,5 +37,4 @@ Please make sure you have same format data to use the widget, or just flash the 
 [liquid-fill-gauge]: http://bl.ocks.org/brattonc/5e5ce9beee483220e2f6
 [paho]: http://www.eclipse.org/paho
 [demo]: http://evanxd.io/air-quality-widget
-[example]: https://github.com/evanxd/air-quality-widget/blob/master/index.html#L39
 [mqtt-air-quality-monitoring-station]: https://github.com/evanxd/mqtt-air-quality-monitoring-station
