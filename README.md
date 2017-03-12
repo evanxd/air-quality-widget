@@ -19,6 +19,15 @@ This is its URL search parameters to receive the real-time air quality data from
 - `topic`
   - A MQTT topic you receive the data from, like `topic` in our [example][example].
 
+The air quality data format/example on the MQTT broker topic is
+```json
+{
+  "pm1_0": 26,
+  "pm2_5": 36,
+  "pm10_0": 38
+}
+```
+
 [d3-js]: https://d3js.org/
 [liquid-fill-gauge]: http://bl.ocks.org/brattonc/5e5ce9beee483220e2f6
 [paho]: http://www.eclipse.org/paho
