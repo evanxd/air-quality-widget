@@ -14,15 +14,15 @@ This is a iframe-based widget. You can simply embed it into your web page with t
 ```
 
 This is its URL search parameters to receive air quality data from a specific MQTT server or topic.
-- `mqtt`
-  - A MQTT server address, like `broker.mqtt-dashboard.com` in our [example][example].
-- `port`
-  - A MQTT server port, like `8000` in our [example][example].
+- `mqtt` (optional)
+  - A MQTT server address, the default value is `broker.mqtt-dashboard.com`.
+- `port` (optional)
+  - A MQTT server port, the default value is `8000`.
 - `topic`
-  - A MQTT topic you receive the data from, like `topic` in our [example][example].
-- `mode`
-  - The widget mode you want to use, like `average` in our [example][example].
-    - `average` means show the one-minute average data, which is the default value.
+  - A MQTT topic you receive the data from, the default value is `topic`.
+- `mode` (optional)
+  - The widget mode you want to use, the default value is `average`.
+    - `average` means show the one-minute average data.
     - `real-time` means show the real-time data at a moment.
 
 The air quality data format/example on the MQTT broker topic is
