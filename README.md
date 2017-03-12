@@ -1,7 +1,7 @@
 # Air Quality Widget
 A Web widget to visually show real-time air quality data. It depends on two libraries, [D3.js][d3-js] ([Liquid Fill Gauge][liquid-fill-gauge]) to show data visually and [Paho][paho] to get data from a MQTT server. Check the [demo here][demo].
 
-![Screenshot](./images/demo.gif)
+-> ![Demo](./images/demo.gif) <-
 
 ## How-to
 This is a iframe-based widget. You can simply embed it into your web page with the below one line HTML code.
