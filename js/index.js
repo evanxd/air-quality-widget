@@ -54,8 +54,22 @@ var WIDGET_MODE = "average"; // Currently, it supports average and real-time mod
 
   function connectServer() {
     console.log("Connecting the MQTT server...");
+
+    // This cutscene animation is for connecting the server.
+    var currentValue = 0;
+    var timer = setInterval(function() {
+      currentValue = currentValue < 100 ? currentValue + 20 : 0;
+      var colors = getDaqiColors(currentValue);
+      config.circleColor = colors.circleColor;
+      config.waveColor = colors.waveColor;
+      config.textColor = colors.textColor;
+      config.waveTextColor = colors.waveTextColor;
+      airQualityGauge.update(currentValue);
+    }, 1000);
+
     client.connect({ onSuccess: function() {
       console.log("Connected with the MQTT server.");
+      clearInterval(timer);
       client.subscribe(mqttTopic);
     }});
   }
@@ -68,7 +82,7 @@ var WIDGET_MODE = "average"; // Currently, it supports average and real-time mod
       colors = ["#F8F83F", "#F8F83F", "#B9B903", "#FFFF69"];
     } else if (pm2_5 >= 54 && pm2_5 < 71) {
       colors = ["#F84C3F", "#F84C3F", "#B91003", "#FF7469"];
-    } else if (pm2_5 >= 71) {
+    } else if (pm2_5 >= 71 && pm2_5 < 100) {
       colors = ["#4B2D74", "#4B2D74", "#2F1355", "#8D75AB"];
     } else {
       colors = ["#8E8E9B", "#8E8E9B", "#535369", "#B8B8BF"];
