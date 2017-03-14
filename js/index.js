@@ -25,15 +25,17 @@ var EXAMPLE_UUID = "123e4567-e89b-12d3-a456-426655440000";
   var client = new Paho.MQTT.Client(mqttServerAddress, mqttServerPort, mqttClientId);
   client.onMessageArrived = function onMessageArrived(message) {
     console.log("data: " + message.payloadString);
-    var pm2_5 = 0;
     try {
-      pm2_5 = JSON.parse(message.payloadString).pm2_5;
+      var pm2_5 = JSON.parse(message.payloadString).pm2_5;
+      if (!Number.isInteger(pm2_5) || pm2_5 < 0) {
+        throw new Error("PM2.5 value should be a positive integer");
+      }
       dataAmount < 30 && dataAmount++;
+      averageData = (averageData * (dataAmount - 1) + pm2_5) / dataAmount;
+      airQualityBlock.render(widgetMode === "average" ? averageData : pm2_5);
     } catch (e) {
       console.log(e.message);
     }
-    averageData = (averageData * (dataAmount - 1) + pm2_5) / dataAmount;
-    airQualityBlock.render(widgetMode === "average" ? averageData : pm2_5);
   };
   client.onConnectionLost = function(response) {
     response.errorCode && connectServer();
