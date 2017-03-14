@@ -13,6 +13,7 @@ var EXAMPLE_UUID = "123e4567-e89b-12d3-a456-426655440000";
   var mqttServerAddress = params.get("server") || MQTT_SERVER_ADDRESS;
   var mqttServerPort = Number(params.get("port")) || MQTT_SERVER_PORT;
   var mqttClientId = uuid && typeof uuid.v4 === "function" ? uuid.v4() : EXAMPLE_UUID;
+  var mqttTopic = params.get("topic") || MQTT_TOPIC;
   var widgetMode = params.get("mode") || WIDGET_MODE;
   var widgetTheme = params.get("theme") || WIDGET_THEME;
   var airQualityBlock = new AirQualityBlock("#air-quality-widget", widgetTheme);
@@ -46,7 +47,6 @@ var EXAMPLE_UUID = "123e4567-e89b-12d3-a456-426655440000";
     console.log("Connecting the MQTT server...");
     client.connect({onSuccess: function() {
       console.log("Connected with the MQTT server.");
-      var mqttTopic = params.get("topic") || MQTT_TOPIC;
       client.subscribe(mqttTopic);
     }});
   }
