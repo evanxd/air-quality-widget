@@ -23,7 +23,7 @@
     _liquidFillGauge: null,
 
     render: function(pm2_5) {
-      var colors = this._getDaqiColors(0);
+      var colors = this._getDaqiColors(pm2_5);
       this._options.circleColor = colors.circleColor;
       this._options.waveColor = colors.waveColor;
       this._options.textColor = colors.textColor;
