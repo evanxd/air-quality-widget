@@ -4,24 +4,30 @@
 (function(exports) {
   function LiquidFillGaugeWrapper(svgId, options) {
     options = options || {};
-    var config = liquidFillGaugeDefaultSettings();
+    this._options = liquidFillGaugeDefaultSettings();
     var colors = this._getDaqiColors(0);
     for (key in options) {
-      config[key] = options;
+      this._options[key] = options;
     }
-    config.displayPercent = false;
-    config.waveHeight = 0;
-    config.circleColor = colors.circleColor;
-    config.waveColor = colors.waveColor;
-    config.textColor = colors.textColor;
-    config.waveTextColor = colors.waveTextColor;
-    this._liquidFillGauge = loadLiquidFillGauge(svgId, 0, config);
+    this._options.displayPercent = false;
+    this._options.waveHeight = 0;
+    this._options.circleColor = colors.circleColor;
+    this._options.waveColor = colors.waveColor;
+    this._options.textColor = colors.textColor;
+    this._options.waveTextColor = colors.waveTextColor;
+    this._liquidFillGauge = loadLiquidFillGauge(svgId, 0, this._options);
   }
 
   LiquidFillGaugeWrapper.prototype = {
+    _options: null,
     _liquidFillGauge: null,
 
     render: function(pm2_5) {
+      var colors = this._getDaqiColors(0);
+      this._options.circleColor = colors.circleColor;
+      this._options.waveColor = colors.waveColor;
+      this._options.textColor = colors.textColor;
+      this._options.waveTextColor = colors.waveTextColor;
       this._liquidFillGauge.update(pm2_5);
     },
 
