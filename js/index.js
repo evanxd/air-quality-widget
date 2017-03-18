@@ -1,4 +1,4 @@
-/* global AirQualityBlock */
+/* global AirQualityBlock, url */
 'use strict';
 
 var MQTT_SERVER_ADDRESS = "broker.mqtt-dashboard.com";
@@ -9,13 +9,12 @@ var WIDGET_THEME = "LiquidFillGauge";
 var EXAMPLE_UUID = "123e4567-e89b-12d3-a456-426655440000";
 
 (function() {
-  var params = new URLSearchParams(window.location.search);
-  var mqttServerAddress = params.get("server") || MQTT_SERVER_ADDRESS;
-  var mqttServerPort = Number(params.get("port")) || MQTT_SERVER_PORT;
+  var mqttServerAddress = url("?server") || MQTT_SERVER_ADDRESS;
+  var mqttServerPort = Number(url("?port")) || MQTT_SERVER_PORT;
   var mqttClientId = uuid && typeof uuid.v4 === "function" ? uuid.v4() : EXAMPLE_UUID;
-  var mqttTopic = params.get("topic") || MQTT_TOPIC;
-  var widgetMode = params.get("mode") || WIDGET_MODE;
-  var widgetTheme = params.get("theme") || WIDGET_THEME;
+  var mqttTopic = url("?topic") || MQTT_TOPIC;
+  var widgetMode = url("?mode") || WIDGET_MODE;
+  var widgetTheme = url("?theme") || WIDGET_THEME;
   var airQualityBlock = new AirQualityBlock("#air-quality-widget", widgetTheme);
 
   // Show the real-time one-minute average data on the widget.
